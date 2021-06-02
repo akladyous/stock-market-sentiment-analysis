@@ -6,7 +6,7 @@ if server =="aws":
     print("running from AWS SageMaker")
 else:
     print("running from: Local")
-    if os.path.getatime(os.getcwd()) == 'capstone':
+    if os.path.basename(os.getcwd()) == 'capstone':
         sys.path.insert(1, os.getcwd() + '/lib/')
     else:
-        sys.path.insert(1, "/Users/boula/Documents/GitHub/Public/capstone/lib/")
+        raise ValueError("Invalid directory")
