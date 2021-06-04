@@ -17,8 +17,8 @@ class Scrapy(object):
                 'User-Agent' : 'Mozilla/5.0',
                 'Connection' : 'keep-alive',
                 'Accept-Encoding': 'gzip, compress, deflate, br',
-                'Cache-Control': 'no-cache',
-                "Pragma": "no-cache"
+                # 'Cache-Control': 'no-cache',
+                # "Pragma": "no-cache"
                 }
         session.headers = headers
         if not url.startswith(("http://", "https://")):

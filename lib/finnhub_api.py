@@ -92,11 +92,3 @@ class Finnhub(FinnHub_init):
         stock_hist = requests.get(stock_url, params=params, timeout=25)
         session.close()
         return stock_hist.json()
-
-# from joblib import load
-# import pandas as pd
-# key = load('./finnhub/finnhub_key.pkl', 'rb')
-# apple = Finnhub(key, "2021-05-28", "2021-05-29", "AAPL")
-# apple_news = apple.company_news()
-# print(len(apple_news))
-# print(pd.DataFrame(apple_news))

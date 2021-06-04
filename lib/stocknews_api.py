@@ -50,17 +50,3 @@ class StockNewsAPI(DateTime_Validator):
             # sys.stdout.flush()
             sleep(.1)
         return self._news        
-
-
-# start_date = "2021-05-01"
-# end_date = "2021-05-02"
-# tickers = "AAPL"
-# with open("./stocknewsapi/stocknewsapi_key.pkl", "rb") as f:
-#     token = pickle.load(f)
-#     f.close
-# stocknewsapi = StockNewsAPI(token, start_date, end_date)
-# all_articles = stocknewsapi.get_news(tickers)
-# print(len(all_articles))
-# print("-" * 50)
-# print(all_articles)
-
