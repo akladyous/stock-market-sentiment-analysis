@@ -1,6 +1,6 @@
 from datetime import datetime, date
 import os
-from decouple import config
+# from decouple import config
 import requests
 import json
 from datetime_util import DateTime_Validator, datetime2timestamp

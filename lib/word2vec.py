@@ -2,11 +2,12 @@ import numpy as np
 import tensorflow as tf
 from keras.optimizers import Adam
 from keras import Sequential, layers
+from keras.losses import categorical_crossentropy
 from keras.layers import GlobalMaxPool1D, LSTM, Dense, Embedding, Bidirectional, Dropout
 
-def make_model(metrics, input_dim, embedding_dim, weights, input_length, output_bias=None):
-    if output_bias is not None:
-        output_bias = tf.keras.initializers.Constant(output_bias)
+def make_model(metrics, input_dim, embedding_dim, weights, input_length): #output_bias=None
+    # if output_bias is not None:
+    #     output_bias = tf.keras.initializers.Constant(output_bias)
 
     model = Sequential()
     model.add(
@@ -25,11 +26,12 @@ def make_model(metrics, input_dim, embedding_dim, weights, input_length, output_
     # model.add(GlobalMaxPool1D())
     model.add(Dense(16, activation='relu', name='dense16'))
     model.add(Dropout(0.5))
-    model.add(Dense(2, activation='softmax', bias_initializer=output_bias, name='output4'))
+    model.add(Dense(3, activation='softmax', name='output4'))
+    # model.add(Dense(3, activation='softmax', bias_initializer=output_bias, name='output4'))
 
     model.compile(
                 optimizer=Adam(lr=1e-3),
-                loss='CategoricalCrossentropy',
+                loss=categorical_crossentropy,
                 metrics=metrics
     )
     return model

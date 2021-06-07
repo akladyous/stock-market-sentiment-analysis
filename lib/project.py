@@ -6,10 +6,10 @@ from joblib import load, dump
 from datetime_util import timestamp2datetime
 from stocknews_api import StockNewsAPI
 from finnhub_api import Finnhub
-from news_api import News_api
+# from news_api import News_api
 from scrapy import Scrapy
 from nlp import NLP_stat
-from model import Model
+# from model import Model
 
 class Project(object):
     def __new__(cls, *args, **kwargs):
@@ -139,15 +139,15 @@ class Project(object):
         if not self._auto_tun:
             return self._df
 
-    def modeling(self):
-        model1 = Model(self._df['articles'], self._df['sentiment'])
-        model1.init()
-        self._accuracy, self._y_predicted = model1.make_prediction()
-        self._pred_df = pd.DataFrame(self._y_predicted, columns=model1.categories).reset_index(drop=True)
-        self._df = pd.concat([self._df.reset_index(drop=True), self._pred_df.reset_index(drop=True)],
-                            axis=1, ignore_index=False, sort=False)
-        if not self._auto_tun:
-            return prediction
+    # def modeling(self):
+    #     model1 = Model(self._df['articles'], self._df['sentiment'])
+    #     model1.init()
+    #     self._accuracy, self._y_predicted = model1.make_prediction()
+    #     self._pred_df = pd.DataFrame(self._y_predicted, columns=model1.categories).reset_index(drop=True)
+    #     self._df = pd.concat([self._df.reset_index(drop=True), self._pred_df.reset_index(drop=True)],
+    #                         axis=1, ignore_index=False, sort=False)
+    #     if not self._auto_tun:
+    #         return prediction
 
 
 
