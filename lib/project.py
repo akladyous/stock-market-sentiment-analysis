@@ -6,7 +6,7 @@ from joblib import load, dump
 from datetime_util import timestamp2datetime
 from stocknews_api import StockNewsAPI
 from finnhub_api import Finnhub
-# from news_api import News_api
+from news_api import News_api
 from scrapy import Scrapy
 from nlp import NLP_stat
 # from model import Model
@@ -60,7 +60,7 @@ class Project(object):
             self.cleaning_data()
             self.scrap_url()
             self.preprocessing()
-            self.modeling()
+            # self.modeling()
             return self._df
 
 
