@@ -3,42 +3,86 @@ import sys
 import requests
 from bs4 import BeautifulSoup as BS
 from numpy import nan
-from selenium import webdriver
+from joblib import dump, load
 
 class Scrapy(object):
     @staticmethod
     def get_url(url, params={}, verify=True, timeout=15, handle_exceptions=False):
-        #https://www.whatismybrowser.com/detect/what-is-my-user-agent
-        session = requests.session()
-        session.stream = True
-        session.cookies.clear()
-        result = None
-        headers= {
-                'User-Agent' : 'Mozilla/5.0',
-                'Connection' : 'keep-alive',
-                'Accept-Encoding': 'gzip, compress, deflate, br',
-                # 'Cache-Control': 'no-cache',
-                # "Pragma": "no-cache"
-                }
-        session.headers = headers
         if not url.startswith(("http://", "https://")):
             return None
-
-        try:
-            result = session.get(url,
-                                params=params,
-                                verify=True,
-                                timeout=timeout,
-                                headers=headers,
-                                allow_redirects=True)
-        except Exception as error:
-            if handle_exceptions:
-                print('Error')
+        url_redirect = None
+        response = None
+        #https://www.whatismybrowser.com/detect/what-is-my-user-agent
+        
+        url_redirect = Scrapy.check_redirect(url, params)
+        
+        if url_redirect :
+            # check if response status code is ok:
+            session = requests.session()
+            # session.stream = True
+            session.cookies.clear()
+            headers= {
+                    'User-Agent' : 'Mozilla/5.0',
+                    'Connection' : 'keep-alive',
+                    'Accept-Encoding': 'gzip, compress, deflate, br',
+                    # 'Cache-Control': 'no-cache',
+                    # "Pragma": "no-cache"
+                    }
+            session.headers = headers
+            
+            try:
+                response = session.get(url_redirect,
+                                    params=params,
+                                    verify=True,
+                                    timeout=timeout,
+                                    headers=headers,
+                                    allow_redirects=True)
+            except Exception as error:
+                session.close()
+                if handle_exceptions:
+                    print(response.raise_for_status())
+            else:
+                session.close()
+                if Scrapy.check_html(response):
+                    return response
+                else:
+                    session.close()
+                    return None
         else:
+            return response
+
+    def check_redirect(url, params={}, handle_exceptions=False):
+        """
+        return real url path
+        """
+        response = None
+        try:
+            session = requests.session()
+            headers= {
+                    'User-Agent' : 'Mozilla/5.0',
+                    'Connection' : 'keep-alive',
+                    'Accept-Encoding': 'gzip, compress, deflate, br',
+                    'Cache-Control': 'no-cache',
+                    "Pragma": "no-cache"
+                    }
+            session.headers = headers
+            session = requests.session()
+            session.stream = True
+            session.cookies.clear()
+            response = session.get(url, params=params, verify=True, headers=headers, allow_redirects=True)
             session.close()
-            return result
+        except:
+            if handle_exceptions:
+                print(response.raise_for_status())
+                return False
+        else:
+            if Scrapy.check_html(response):
+                return response.url
+            else:
+                return False
+
     @staticmethod
-    def check_result(html_page):
+    def check_html(html_page):
         if isinstance(html_page, requests.Response):
             if html_page and html_page.status_code == 200:
                 return True
@@ -47,41 +91,72 @@ class Scrapy(object):
 
     @staticmethod
     def url2text(html_page):
-        articles = None
-        # html_page = self.get_url(timeout=40)
-        if Scrapy.check_result(html_page):
-            p_tags = BS(html_page.content, 'html.parser').find_all('p')
-            articles_tags = [x.text for x in p_tags]
-            articles = (' '.join(articles_tags))
+        """
+        Scrap articles from html page content
+        """
+        article = None
+        if Scrapy.check_html(html_page):
+            soup = BS(html_page.content, 'html.parser')
+            p_tags = soup.find_all('p')
+            article_tags = [x.text for x in p_tags]
+            if len(article_tags) >=1:
+                article = ' '.join(article_tags)
+            else:
+                article = None
         else:
-            missing_urls.append((idx, url))
-            articles = nan
-        return articles
+            article = nan
+        return article
 
     @staticmethod
     def scrap(url_list):
-        articles = []
-        missing_articles = []
-        total_urls = len(url_list)
-        for idx, url, in enumerate(url_list):
-            sys.stdout.write(f"{idx+1}/{total_urls} {round(idx/total_urls*100)}% {url}\r")
-            html_page = Scrapy.get_url(url, timeout=40)
-            if Scrapy.check_result(html_page):
-                p_tags = BS(html_page.content, 'html.parser').find_all('p')
-                articles_tags = [x.text for x in p_tags]
-                if len(articles_tags) >=1:
-                    articles.append(' '.join(articles_tags))
+        if isinstance(url_list, list):
+            articles = []
+            missing_articles = []
+            total_urls = len(url_list)
+            content = None
+            for idx, url, in enumerate(url_list):
+                if not Scrapy.url_blacklist(url):
+                    html_page = Scrapy.get_url(url, timeout=5)
+                    if Scrapy.check_html(html_page):
+                        sys.stdout.write(f"{idx+1}/{total_urls} {round(idx/total_urls*100)}% {html_page.url}\r")
+                        content = Scrapy.url2text(html_page)
+                        if content:
+                            articles.append(content)
+                        else:
+                            articles.append(nan)
+                            # missing_articles.append(url)
+                    else:
+                        # missing_articles.append(url)
+                        articles.append(nan)
+                    sys.stdout.flush()
+                    sleep(1)
                 else:
                     articles.append(nan)
+                    # missing_articles.append(url)
+        else:
+            raise ValueError("input should be a list of url's")
+        return articles #, missing_articles
+    
+    @staticmethod
+    def url_blacklist(url):
+        status = False
+        blacklist = ['nasdaq', 'seekingalpha']
+        for website in blacklist:
+            if url.find(website) == -1:
+                status = False
             else:
-                missing_articles.append((idx, url))
-                articles.append(nan)
-            sys.stdout.flush()
-            sleep(1)
-        return articles, missing_articles
+                status = True
+        return status
 
     @staticmethod
     def web_scrap(url_list):
+        """
+        Scrap url's from given list of url's using "Selenium"
+        """
+        # "Accept-Language":"en-US,en;q=0.9"
+        # "Accept-Encoding":"gzip, deflate, br"
+        # "User-Agent":"Java-http-client/"
+        from selenium import webdriver
         driver = webdriver.Chrome(executable_path="/usr/local/bin/chromedriver")
         driver.implicitly_wait(10)
         article = None
@@ -100,23 +175,11 @@ class Scrapy(object):
         driver.close()
         return articles
 
-# s=Scrapy()
-# r = s.get_url('http://www.google.com', handle_exceptions=True)
-# print(r)
+# from joblib import load
+# import pandas as pd
+# from scrapy import Scrapy
 
-
-
-# url="https://www.fool.com/investing/2020/05/05/apple-news-engagement-is-soaring-amidst-covid-19.aspx"
-# urls=[
-#     "https://www.cnbc.com/2020/05/04/apple-announces-new-13-inch-macbook-pro-with-magic-keyboard.html",
-#     "https://www.fool.com/investing/2020/05/05/now-is-a-perfect-time-for-apple-to-buy-sonos.aspx",
-#     "https://www.fool.com/investing/2020/05/05/has-apple-shot-itself-in-crucial-india-smartphone.aspx",
-#     "https://www.fool.com/investing/2020/05/05/apple-news-engagement-is-soaring-amidst-covid-19.aspx"
-#     ]
-# s = Scrapy()
-# # s1 = s.get_url(url)
-# # print(s1.status_code)
-# # s2 = s.url2text(s.get_url(url))
-# ar = s.scrap(urls)
-# print(print(len(ar)))
-# print(ar[0])
+# scrap = Scrapy()
+# finnhub_key=load('./finnhub/finnhub_key.pkl')
+# df_news = pd.read_csv('./data/finnhub_news.csv')
+# articles = scrap.scrap(df_news['url'].to_list()[3:])

@@ -44,10 +44,14 @@ class Finnhub(FinnHub_init):
 
     def company_news(self):
         self._cn_url = 'https://finnhub.io/api/v1/company-news?'
-        self._cn_params  = {'symbol': self.symbol,'token':self._token, 'from':self.start_date, 'to':self.end_date}
+        self._cn_params  = {'symbol': self.symbol,
+                            'token':self._token,
+                            'from':self.start_date,
+                            'to':self.end_date
+                            }
         html_page = Scrapy.get_url(self._cn_url, self._cn_params)
 
-        if Scrapy.check_result(html_page):
+        if Scrapy.check_html(html_page):
             all_articles = json.loads(html_page.text)
             if len(all_articles) > 0:
                 self.news_list = all_articles
@@ -92,3 +96,15 @@ class Finnhub(FinnHub_init):
         stock_hist = requests.get(stock_url, params=params, timeout=25)
         session.close()
         return stock_hist.json()
+
+
+
+
+# from joblib import load
+# import pandas as pd
+# from scrapy import Scrapy
+
+# scrap = Scrapy()
+# finnhub_key=load('./finnhub/finnhub_key.pkl')
+# df_news = pd.read_csv('./data/finnhub_news.csv')
+# articles = scrap.scrap(df_news['url'][:2].to_list())

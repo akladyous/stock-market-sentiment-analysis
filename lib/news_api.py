@@ -1,5 +1,5 @@
 from datetime_util import DateTime_Validator
-from newsapi import NewsApiClient
+# from newsapi import NewsApiClient
 from scrapy import Scrapy
 import requests
 import json
@@ -78,7 +78,7 @@ class News_api(DateTime_Validator):
     
     @staticmethod
     def _check_articles(html_page):
-        if Scrapy.check_result(html_page):
+        if Scrapy.check_html(html_page):
             all_articles = json.loads(html_page.text)
             if isinstance(all_articles, dict):
                 if  (
@@ -92,22 +92,22 @@ class News_api(DateTime_Validator):
         else:
             return False
 
+# from joblib import load
+# import pandas as pd
 
 # sources = ['abc-news',
 #            'business-insider',
-        #    'financial-post',
-        #    'google-news',
-        #    'reuters',
-        #    'nbc-news',
-        #    'techcrunch',
-        #    'wired',
-        #    'the-wall-street-journal'
-        #   ]
-# from joblib import load
-# newsapi_key = "cd23a40b7a0d44cb99af86eeb31869eb"
-# apple_obj = News_api(newsapi_key, "2021-05-29","2021-05-29")
-# apple_news = apple_obj.get_news('AAPL', sources=sources)
-# print(apple_news)
+#            'financial-post',
+#            'google-news',
+#            'reuters',
+#            'nbc-news',
+#            'techcrunch',
+#            'wired',
+#            'the-wall-street-journal'
+#           ]
 
-# sources = ['abc-news','business-insider','google-news','nbc-news','reuters','techcrunch']
-# nn = News_api(newsapi_key, "2021-05-03","2021-05-07",["AAPL"],sources)
+# newsapi_key = load("./newsapi/newsapi_key.pkl")
+# apple_obj = News_api(newsapi_key, "2021-06-01","2021-06-07")
+# news = apple_obj.get_news('AAPL')
+# df = pd.DataFrame(news['apple'])
+# print(df.info)

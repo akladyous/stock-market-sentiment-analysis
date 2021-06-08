@@ -122,7 +122,7 @@ class Project(object):
             return self._news_df
 
     def scrap_url(self):
-        self._articles, miss_urls = Scrapy.scrap(self._news_df['url'])
+        self._articles = Scrapy.scrap(self._news_df['url'].to_list())
         self._news_df['articles'] = self._articles
         if not self._auto_tun:
             return self._news_df
@@ -153,6 +153,8 @@ class Project(object):
 
 
 # import pandas as pd
+# new_df = Project("2021-06-07", "2021-06-07", "AAPL", True, newsapi=True, finnhub=True, stocknews=True).run()
+
 
 # p = Project("2021-05-29", "2021-05-29", "AAPL", False, newsapi=True, finnhub=True, stocknews=True)
 # l1,l2,l3=p.data_collection()
