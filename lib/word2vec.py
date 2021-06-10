@@ -1,14 +1,18 @@
 import numpy as np
-import tensorflow as tf
-from keras.optimizers import Adam
-from keras import Sequential, layers
-from keras.losses import categorical_crossentropy
-from keras.layers import GlobalMaxPool1D, LSTM, Dense, Embedding, Bidirectional, Dropout
 
 def make_model(metrics, input_dim, embedding_dim, weights, input_length): #output_bias=None
+    import tensorflow as tf
+    from tensorflow.keras.optimizers import Adam
+    from keras import Sequential, layers
+    from keras.layers import CuDNNLSTM, LSTM, Dense, Embedding, Bidirectional, Dropout
+    from keras.losses import categorical_crossentropy
+    from keras.layers import GlobalMaxPool1D, LSTM, Dense, Embedding, Bidirectional, Dropout
+
     # if output_bias is not None:
     #     output_bias = tf.keras.initializers.Constant(output_bias)
 
+    # tf.function(jit_compile=True)
+    # tf.compat.v1.enable_eager_execution()
     model = Sequential()
     model.add(
         layers.Embedding(
@@ -22,7 +26,8 @@ def make_model(metrics, input_dim, embedding_dim, weights, input_length): #outpu
             )
         )
     model.add(Bidirectional(LSTM(units=embedding_dim, return_sequences=True)))
-    model.add(layers.LSTM(16))
+    # model.add(LSTM(32))
+    # model.add(CuDNNLSTM(32))
     # model.add(GlobalMaxPool1D())
     model.add(Dense(16, activation='relu', name='dense16'))
     model.add(Dropout(0.5))
@@ -30,7 +35,7 @@ def make_model(metrics, input_dim, embedding_dim, weights, input_length): #outpu
     # model.add(Dense(3, activation='softmax', bias_initializer=output_bias, name='output4'))
 
     model.compile(
-                optimizer=Adam(lr=1e-3),
+                optimizer='adam',
                 loss=categorical_crossentropy,
                 metrics=metrics
     )
