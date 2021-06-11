@@ -55,7 +55,7 @@ The dataset is entirly scraped from diffrent financial sources using the followi
 
 #### Interpretation
 
-<img align="right" width="400" height="400" hspace="0" vspace="0" src="https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/roc.jpg"><img align="left" width="400" height="400" hspace="0" vspace="20" src="https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/cm.png">
+<img align="right" width="300" height="300" hspace="0" vspace="0" src="https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/roc.jpg"><img align="left" width="300" height="350" hspace="0" vspace="10" src="https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/cm.png">
 
 
 
