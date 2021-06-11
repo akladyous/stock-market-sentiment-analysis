@@ -48,6 +48,16 @@ The dataset is entirly scraped from diffrent financial sources using the followi
 - Scikit-learn
 - Statsmodels
 
+#### Exploratory Data Analysis
+
+<img align="left" width="700" height="500" src="https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/top10_news_source.png">
+
+<img align="left" width="600" height="700" src="https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/word_freq_distribution.png">
+
+
+
+<img align="left" width="500" height="500" src="https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/word_cloud">
+
 #### Models
 
 - TfidfVectorizer
@@ -55,7 +65,7 @@ The dataset is entirly scraped from diffrent financial sources using the followi
 
 #### Interpretation
 
-
+<img align="left" width="300" height="300" hspace="0" vspace="0" src="https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/roc.jpg">
 
 
 
