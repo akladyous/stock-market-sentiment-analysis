@@ -55,7 +55,9 @@ The dataset is entirly scraped from diffrent financial sources using the followi
 
 #### Interpretation
 
-![]src=""(https://github.com/akladyous/stock-market-sentiment-analysis/blob/main/img/roc.jpg)"
+<img align="left" width="400" height="400" src="https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/roc.jpg">
+
+
 
 The method we used in our project to do sentiement analysis and price forcasting includes 2 magior modeling approaches:
 
