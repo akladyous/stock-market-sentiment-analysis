@@ -50,13 +50,17 @@ The dataset is entirly scraped from diffrent financial sources using the followi
 
 #### Exploratory Data Analysis
 
-<img align="left" width="700" height="500" src="https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/top10_news_source.png">
+<img align="left" src="https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/top10_news_source.png">
 
-<img align="left" width="600" height="700" src="https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/word_freq_distribution.png">
+<br clear="left"/>
 
+<img align="left" src="https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/word_freq_distribution.png">
 
+<br clear="left"/>
 
-<img align="left" width="500" height="500" src="https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/word_cloud">
+<img align="left" width="500" height="500" src="https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/word_cloud.png">
+
+<br clear="left"/>
 
 #### Models
 
@@ -67,21 +71,7 @@ The dataset is entirly scraped from diffrent financial sources using the followi
 
 <img align="left" width="300" height="300" hspace="0" vspace="0" src="https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/roc.jpg">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<br clear="left"/>
 
 The method we used in our project to do sentiement analysis and price forcasting includes 2 magior modeling approaches:
 
