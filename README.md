@@ -50,15 +50,15 @@ The dataset is entirly scraped from diffrent financial sources using the followi
 
 #### Exploratory Data Analysis
 
-[img](https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/top10_news_source.png?raw=True)
+![img](https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/top10_news_source.png?raw=True)
 
 <br clear="left"/>
 
-[img](https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/word_freq_distribution.png?raw=True)
+![img](https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/word_freq_distribution.png?raw=True)
 
 <br clear="left"/>
 
-[img](https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/word_cloud.png?raw=True)
+![img](https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/word_cloud.png?raw=True)
 
 <br clear="left"/>
 
@@ -69,7 +69,7 @@ The dataset is entirly scraped from diffrent financial sources using the followi
 
 #### Interpretation
 
-[img](https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/roc.jpg?raw=True)
+![img](https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/roc.jpg?raw=True)
 
 <br clear="left"/>
 
