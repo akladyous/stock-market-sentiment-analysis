@@ -174,12 +174,3 @@ class Scrapy(object):
             sys.stdout.flush()
         driver.close()
         return articles
-
-# from joblib import load
-# import pandas as pd
-# from scrapy import Scrapy
-
-# scrap = Scrapy()
-# finnhub_key=load('./finnhub/finnhub_key.pkl')
-# df_news = pd.read_csv('./data/finnhub_news.csv')
-# articles = scrap.scrap(df_news['url'].to_list()[3:])

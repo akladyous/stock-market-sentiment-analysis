@@ -1,8 +1,6 @@
 import pandas as pd
 import numpy as np
 from joblib import load, dump
-
-# import main
 from datetime_util import timestamp2datetime
 from stocknews_api import StockNewsAPI
 from finnhub_api import Finnhub
@@ -138,30 +136,3 @@ class Project(object):
         self._df.rename(columns={'text':'articles'}, inplace=True)
         if not self._auto_tun:
             return self._df
-
-    # def modeling(self):
-    #     model1 = Model(self._df['articles'], self._df['sentiment'])
-    #     model1.init()
-    #     self._accuracy, self._y_predicted = model1.make_prediction()
-    #     self._pred_df = pd.DataFrame(self._y_predicted, columns=model1.categories).reset_index(drop=True)
-    #     self._df = pd.concat([self._df.reset_index(drop=True), self._pred_df.reset_index(drop=True)],
-    #                         axis=1, ignore_index=False, sort=False)
-    #     if not self._auto_tun:
-    #         return prediction
-
-
-
-
-# import pandas as pd
-# new_df = Project("2021-06-07", "2021-06-07", "AAPL", True, newsapi=True, finnhub=True, stocknews=True).run()
-
-
-# p = Project("2021-05-29", "2021-05-29", "AAPL", False, newsapi=True, finnhub=True, stocknews=True)
-# l1,l2,l3=p.data_collection()
-# df1 = p.cleaning_data()
-# df1.to_csv('./data/df1.csv', index=False)
-# art = p.scrap_url()
-# df2 = p.preprocessing()
-# df2.to_csv('./data/df2.csv', index=False)
-
-

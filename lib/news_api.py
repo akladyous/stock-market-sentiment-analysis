@@ -91,23 +91,3 @@ class News_api(DateTime_Validator):
                     return False
         else:
             return False
-
-# from joblib import load
-# import pandas as pd
-
-# sources = ['abc-news',
-#            'business-insider',
-#            'financial-post',
-#            'google-news',
-#            'reuters',
-#            'nbc-news',
-#            'techcrunch',
-#            'wired',
-#            'the-wall-street-journal'
-#           ]
-
-# newsapi_key = load("./newsapi/newsapi_key.pkl")
-# apple_obj = News_api(newsapi_key, "2021-06-01","2021-06-07")
-# news = apple_obj.get_news('AAPL')
-# df = pd.DataFrame(news['apple'])
-# print(df.info)

@@ -96,15 +96,3 @@ class Finnhub(FinnHub_init):
         stock_hist = requests.get(stock_url, params=params, timeout=25)
         session.close()
         return stock_hist.json()
-
-
-
-
-# from joblib import load
-# import pandas as pd
-# from scrapy import Scrapy
-
-# scrap = Scrapy()
-# finnhub_key=load('./finnhub/finnhub_key.pkl')
-# df_news = pd.read_csv('./data/finnhub_news.csv')
-# articles = scrap.scrap(df_news['url'][:2].to_list())
