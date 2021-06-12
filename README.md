@@ -1,4 +1,4 @@
-## Twitter Sentiment Analysis.
+## Stock Market Sentiment Analysis.
 
 **Abstract**
 
@@ -6,13 +6,36 @@ The stock market is very dynamic and is considered to be one of the most sensiti
 
 The application addressed in this project analyze the impact of sentiment on the stock market. and able to forecasts stock market movement direction not only using financial market data, but also combining them with and extensive dataset that combines social media and news articles.
 
+#### Objective
+
+- Identification of trends in the stock prices of a company by performing sentiment analysis.
+
+- find out which news source is the most impactful on predicting the stock price.
+
+- Build a classification model capable of predicting the stock price for the upcoming 30 minutes.
+
+  
+
 ##### Data Collection
 
-The dataset is entirly scraped from diffrent financial sources using the following API:
+The dataset is entirely scraped from different financial sources using different APIs and concerns the news related to the stock Apple from 01/01/2019 to 04/30/2021.
+the bees used are the following:
 
-1. NEWSAPI              https://newsapi.org/
-2. FINNHUB API       https://finnhub.io/
-3. STOCK NEWS API https://stocknewsapi.com/
+- NEWSAPI              https://newsapi.org/
+- FINNHUB API       https://finnhub.io/
+- STOCK NEWS API https://stocknewsapi.com/
+
+<img src="https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/top10_news_source.png?raw=True" alt="img" style="zoom:67%;" />
+
+#### Features Engineering
+
+since we are dealing with unlabeled datasets, we applied VADER  pre-trained model to classify the scraped articles and extract new features needed for our model.
+
+
+
+![img](https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/sentiment_distribution.png?raw=True)
+
+
 
 ##### Metrics
 
@@ -50,7 +73,11 @@ The dataset is entirly scraped from diffrent financial sources using the followi
 
 #### Exploratory Data Analysis
 
-![img](https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/top10_news_source.png?raw=True)
+
+
+![img](https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/news_sources_vs_sentiment.png?raw=True)
+
+
 
 <br clear="left"/>
 
@@ -58,7 +85,7 @@ The dataset is entirly scraped from diffrent financial sources using the followi
 
 <br clear="left"/>
 
-![img](https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/word_cloud.png?raw=True)
+<img src="https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/word_cloud.png?raw=True" style="zoom:50%;" />
 
 <br clear="left"/>
 
