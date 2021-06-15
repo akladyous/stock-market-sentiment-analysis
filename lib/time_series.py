@@ -24,7 +24,7 @@ class TS(object):
         params, value = (None, None)
         for pdq_params in pdq:
             for pdqs_params in pdqs:
-                output = TS.sarimax_model(ts_data, pdq_params, pdqs_params)
+                output = TS.sarimax_model(ts_data, exog=None, order=pdq_params, seasonal_order=pdqs_params)
                 if value is None or output.aic < value:
                     params, value = ((pdq_params, pdqs_params), output.aic)
                     if verbose:
@@ -32,8 +32,9 @@ class TS(object):
         return params
 
     @staticmethod
-    def sarimax_model(ts_data, order, seasonal_order, enforce_stationarity=False, enforce_invertibility=False):
+    def sarimax_model(ts_data, exog, order, seasonal_order, enforce_stationarity=False, enforce_invertibility=False):
         model = SARIMAX(endog=ts_data,
+                        exog=exog,
                         order=order,
                         seasonal_order=seasonal_order,
                         enforce_stationarity=False,

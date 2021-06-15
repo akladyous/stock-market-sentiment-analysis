@@ -26,7 +26,7 @@ def make_model(metrics, input_dim, embedding_dim, weights, input_length): #outpu
             )
         )
     model.add(Bidirectional(LSTM(units=embedding_dim, return_sequences=True)))
-    model.add(LSTM(32))
+    # model.add(LSTM(32))
     model.add(Dense(16, activation='relu', name='dense16'))
     model.add(Dropout(0.5))
     model.add(Dense(3, activation='softmax', name='output4'))
@@ -48,3 +48,10 @@ def class_weights_ohe(Y_ohe):
     class_weights={k:v for k,v in enumerate(weights)}
     return weights
 
+def compute_aucs(predictions, labels):
+    from sklearn.metrics import roc_auc_score
+    num_classes = predictions.shape[1]
+    aucs = np.zeros(num_classes)
+    for i in range(num_classes):
+        aucs[i] = roc_auc_score(labels[:, i], predictions[:, i])
+    return aucs

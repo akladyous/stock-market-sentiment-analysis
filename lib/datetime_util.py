@@ -11,9 +11,12 @@ class DateTime_Validator(object):
         self._date_len  = len("YYYY-MM-DD")
         self._date_fmt  = "%Y-%m-%d"
         # Datetime in ISO-8601 format
-        self._datetime_regx = re.compile(r'^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$')
-        self._datetime_len  = len("YYYY-MM-DDTHH:MM:SS")
-        self._datetime_fmt  = "%Y-%m-%dT%H:%M:%S"
+        self._datetime_regx = re.compile(r'^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$')
+        # self._datetime_regx = re.compile(r'^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$')
+        self._datetime_len  = len("YYYY-MM-DD HH:MM:SS")
+        # self._datetime_len  = len("YYYY-MM-DDTHH:MM:SS")
+        self._datetime_fmt  = "%Y-%m-%d %H:%M:%S"
+        # self._datetime_fmt  = "%Y-%m-%dT%H:%M:%S"
 
         self._start_date = self.validate_date(start_date)
         self._end_date   = self.validate_date(end_date)
@@ -84,8 +87,9 @@ class DateTime_Validator(object):
     def _check_delta_dates(start_date, end_date):
         if start_date > end_date:
             raise Exception("Start_Date is older than End_Date")
-        if (start_date <= (datetime.now() - relativedelta(years=3))) :
+        if (start_date <= (datetime.now() - relativedelta(years=7))) :
             raise Exception("Start_Date shouldn't be older than 2 year")
+
 
 def timestamp2datetime(value):
     """convert Epoch & Unix Timestamp  to datetime object"""
@@ -100,3 +104,7 @@ def str2datetime(date_str):
 
 def str2date(date_str):
     return datetime.strptime(date_str, '%Y-%m-%d')
+
+def datetime2str(value):
+    return value.strftime('%Y-%m-%d %H:%M:%S')
+

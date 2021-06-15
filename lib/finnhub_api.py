@@ -5,6 +5,7 @@ import requests
 import json
 from datetime_util import DateTime_Validator, datetime2timestamp
 from scrapy import Scrapy
+import pandas as pd
 
 class FinnHub_init(DateTime_Validator):
     def __init__(self, token, start_date, end_date):
@@ -95,4 +96,9 @@ class Finnhub(FinnHub_init):
         session = requests.session()
         stock_hist = requests.get(stock_url, params=params, timeout=25)
         session.close()
-        return stock_hist.json()
+        data = stock_hist.json()
+        hist_cols = ['close', 'high', 'low', 'open', 'status','date', 'volume']
+        df = pd.DataFrame(data)
+        df.columns = hist_cols        
+        return df
+

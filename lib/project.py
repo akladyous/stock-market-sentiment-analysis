@@ -132,7 +132,8 @@ class Project(object):
         self._score_df = NLP_stat.polarity_score(self._news_df['articles'])
         self._df = pd.concat([self._news_df.reset_index(drop=True), self._score_df.reset_index(drop=True)],
                             axis=1, ignore_index=False, sort=False)
-        self._df.drop(labels=['articles','url'], axis=1, inplace=True)
+        self._df.drop(labels=['articles','neg','neu', 'pos', 'comp'], axis=1, inplace=True)
         self._df.rename(columns={'text':'articles'}, inplace=True)
         if not self._auto_tun:
             return self._df
+
