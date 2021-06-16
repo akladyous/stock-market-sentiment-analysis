@@ -2,7 +2,9 @@
 
 **Abstract**
 
-The stock market is very dynamic and is considered to be one of the most sensitive field to rapid changes due to the underlying nature of the financial domain. There are various factors that influence stock sentiment, which include news (economic, political and industry related) and social media. These factors help influence stock sentiment as they impact stock market volatility and the overall trend.
+The stock market is very dynamic and considered to be one of the most sensitive field to rapid changes due to the underlying nature of the financial domain. There are various factors that influence stock sentiment, which include news (economic, political and industry related) and social media. These factors help influence stock sentiment as they impact stock market volatility and the overall trend.
+
+Market sentiment becomes essential to distinguish and classify the various factors driving investor sentiments and furthermore to comprehend their implications on investment decisions. 
 
 The application addressed in this project analyze the impact of the sentiment on the stock market and it's able to forecast stock market movement direction not only using financial market data, but also combining them with and extensive dataset that combines social media and news articles.
 
@@ -18,7 +20,11 @@ The application addressed in this project analyze the impact of the sentiment on
 
 ##### Data Collection
 
-The dataset is entirely scraped from different financial sources using different APIs and concerns the news related to the stock Apple from 01/01/2019 to 04/30/2021.
+The first task of this project was collecting and compiling a newspaper corpus to run sentiment analysis. While there were corpuses of historical texts and emails available on the Internet, not many online archives provided the articles in a chronological structure with well-organized Metadata. Furthermore, digital forms of newspapers would require text extraction and often had copyright issues.
+
+I decided to compile my own corpus of news articles. The three helpful APIs I found for this purpose was the NEWSAPI API, FINNHUB API and STOCKNEWS API. I used the STOCKNEWS API to compile the corpus of 10.450 articles. While the NEWSAPI and FINNHUB are used to collect news articles  for the real-time projection. 
+
+The dataset is entirely scraped from different financial sources  and concerns the news related to the APPLE stock from 01/01/2019 to 04/30/2021.
 
 The API's used are the following:
 
@@ -29,6 +35,8 @@ The API's used are the following:
 <img src="https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/top10_news_source.png?raw=True" alt="img" style="zoom:67%;" />
 
 #### Features Engineering
+
+The way we perform the sentiment analysis is  lexicon-based approach using Valence Aware Dictionary and Sentiment Reasoner (VADER) which is designed explicitly for sentiment analysis on social media.
 
 Since we are dealing with unlabeled datasets, we applied VADER pre-trained model to classify the scraped articles and extract new features needed for our model.
 
@@ -41,7 +49,7 @@ Since we are dealing with unlabeled datasets, we applied VADER pre-trained model
 ##### Metrics
 
 - Accuracy
-- ROC
+- AUC
 
 ##### Liberary
 
@@ -55,7 +63,6 @@ Since we are dealing with unlabeled datasets, we applied VADER pre-trained model
 - DateTime
 - Time
 - OS
-- Requests
 - RE
 - Itertools
 - Langdetect
@@ -63,12 +70,10 @@ Since we are dealing with unlabeled datasets, we applied VADER pre-trained model
 - Gensim
 - Numpy
 - Pandas
-- Seaborn
 - Matplotlib
 - Ploty
 - Wordcloud
 - Tensorflow
-- Keras
 - Scikit-learn
 - Statsmodels
 
@@ -88,8 +93,6 @@ Since we are dealing with unlabeled datasets, we applied VADER pre-trained model
 
 <img src="https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/word_cloud.png?raw=True" style="zoom:50%;" />
 
-<br clear="left"/>
-
 #### Models
 
 - TfidfVectorizer
@@ -99,7 +102,7 @@ Since we are dealing with unlabeled datasets, we applied VADER pre-trained model
 
 ![img](https://raw.githubusercontent.com/akladyous/stock-market-sentiment-analysis/main/img/roc.jpg?raw=True)
 
-<br clear="left"/>
+
 
 The method we used in our project to do sentiement analysis and price forcasting includes 2 major modeling approaches:
 
