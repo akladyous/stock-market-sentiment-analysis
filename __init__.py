@@ -6,3 +6,5 @@ if os.path.basename(os.getcwd()) == 'capstone':
 else:
     sys.path.insert(1, os.getcwd() + '/lib/')
     #raise ValueError("Invalid directory")
+
+# 
