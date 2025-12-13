@@ -1,0 +1,23 @@
+{
+    "tech stack": [
+        "Jupyter Notebooks",
+        "pandas",
+        "numpy",
+        "scikit-learn",
+        "TensorFlow/Keras",
+        "gensim (Word2Vec)",
+        "statsmodels (SARIMAX)",
+        "NLTK (VADER)",
+        "langdetect",
+        "matplotlib",
+        "plotly",
+        "wordcloud",
+        "requests",
+        "BeautifulSoup",
+        "Selenium",
+        "Scrapy",
+        "NewsAPI",
+        "Finnhub API",
+        "StockNews API"
+    ]
+}
