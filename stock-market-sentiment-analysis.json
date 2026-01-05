@@ -1,0 +1,29 @@
+{
+    "tech stack": [
+        "Jupyter Notebooks",
+        "pandas",
+        "numpy",
+        "scikit-learn",
+        "TensorFlow/Keras",
+        "gensim (Word2Vec)",
+        "statsmodels (SARIMAX)",
+        "NLTK (VADER)",
+        "langdetect",
+        "matplotlib",
+        "plotly",
+        "wordcloud",
+        "requests",
+        "BeautifulSoup",
+        "Selenium",
+        "Scrapy",
+        "NewsAPI",
+        "Finnhub API",
+        "StockNews API"
+    ],
+    "highlights": [
+        "Built an end-to-end stock market sentiment analysis pipeline by aggregating and processing 10,450+ financial news articles from multiple APIs (NewsAPI, Finnhub, StockNews) to model market sentiment signals.",
+        "Engineered NLP features from unlabeled text using VADER sentiment scoring, TF-IDF, GloVe embeddings, and Word2Vec to transform raw news data into model-ready inputs.",
+        "Trained and evaluated deep learning and statistical models, including bidirectional LSTM networks and SARIMAX, to predict short-term stock movement direction and price trends.",
+        "Achieved 92.8% classification accuracy and ~89% ROC-AUC on imbalanced sentiment data, and successfully forecasted stock price movements up to 30 minutes ahead."
+    ]
+}
